@@ -21,11 +21,6 @@ class AugmentedLLM:
         # ツールの定義
         self.tool_dict = register_tools(tools) if tools is not None else None
         self.tool_selector_name = "gemma3:4b"
-        
-        # 他のエージェントへの伝達機能
-        self.report_text = None
-        self.report_images = None
-        self.report_data = None
     
     #---------------------------------------------------------------
     # インスタンスを生成する関数
@@ -233,12 +228,6 @@ class AugmentedLLM:
             #
             full_reply = reply 
             yield full_reply
-        
-        # 報告用のデータ作成
-        self.report_text = f"{full_reply}"
-        self.report_images = None
-        self.report_images = local_history[0].get("images", None)
-        self.report_data = None
     
     #---------------------------------------------------------------
     # 
@@ -267,14 +256,4 @@ class AugmentedLLM:
                 yield "[エラー: モデルからの応答が空でした]" 
         
         except Exception as e:
-            yield f"[エラー発生: {str(e)}]"
-
-    #---------------------------------------------------------------
-    # 報告を行う
-    #---------------------------------------------------------------
-    def report(self):
-        return {
-            "text": self.report_text,
-            "images": self.report_images,
-            "data": self.report_data
-        }        
+            yield f"[エラー発生: {str(e)}]"  
