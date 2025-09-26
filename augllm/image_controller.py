@@ -18,7 +18,7 @@ def get_image_cache_path(image_path, cache_dir):
     return os.path.join(cache_dir, filename)
 
 #--------------------------------------------------------------------------------------
-# 画像をリサイズして キャッシュで画像を保存し、Ollamaにパスを返す関数
+# 画像をリサイズして キャッシュで画像を保存し、LLMにパスを返す関数
 #--------------------------------------------------------------------------------------
 def shrink_and_cache_image(image_path, cache_dir, max_size=512):
     os.makedirs(cache_dir, exist_ok=True)

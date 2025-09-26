@@ -1,12 +1,5 @@
 
-# 自作のローカル LLM クラスをインポート
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parent / "../augllm")) # srcのプログラムを対象
-
-from augmented_llm import AugmentedLLM
-from llm_interface import LLMInterface
-from prompt_builder import PromptBuilder
+from augllm import AugmentedLLM, LLMInterface, PromptBuilder
 #----------------------------------------------------------------------------
 #
 #----------------------------------------------------------------------------
@@ -51,6 +44,7 @@ if __name__ == "__main__":
             system_prompt_text="あなたは、AIアシスタントです。",
             system_prompt_images=""
         ),
+        cache_dir="cache/",
         tools=None,
     )
     

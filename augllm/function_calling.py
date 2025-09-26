@@ -3,7 +3,7 @@ import inspect
 from typing import Callable, Any, Dict, List, Optional
 import yaml
 import re
-from tool import Tool
+from .tool import Tool
 #------------------------------------------------------------------------------------
 # 関数 (ツール) を名前にマッピングして登録します。
 #------------------------------------------------------------------------------------

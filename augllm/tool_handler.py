@@ -1,7 +1,7 @@
 
 from typing import List, Tuple, Optional
-from function_calling import cast_arguments, extract_tool_calls_from_yaml
-from llm_interface import LLMInterface
+from .function_calling import cast_arguments, extract_tool_calls_from_yaml
+from .llm_interface import LLMInterface
 #---------------------------------------------------------------
 # ツール呼び出し用LLMのロード
 #---------------------------------------------------------------

@@ -1,9 +1,9 @@
 # My rules
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.mp4
+cache/*.png
+cache/*.jpg
+cache/*.jpeg
+cache/*.gif
+cache/*.mp4
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,9 +1,9 @@
 
 
 from typing import Optional
-from make_image_paths import make_image_paths
-from function_calling import register_tools, generate_system_prompt
-from tool_handler import select_tool
+from .make_image_paths import make_image_paths
+from .function_calling import register_tools, generate_system_prompt
+from .tool_handler import select_tool
 #===================================================================================
 # Coreの部分
 #===================================================================================
@@ -12,7 +12,7 @@ class AugmentedLLM:
     #---------------------------------------------------------------
     # パラメータの初期化
     #---------------------------------------------------------------
-    def __init__(self, llm, prompt_builder, tools=None):
+    def __init__(self, llm, prompt_builder, cache_dir, tools=None):
 
         # LLMの設定
         self.llm = llm
@@ -21,6 +21,9 @@ class AugmentedLLM:
         # ツールの定義
         self.tool_dict = register_tools(tools) if tools is not None else None
         self.tool_selector_name = "gemma3:4b"
+        
+        # 内部データの保存先
+        self.cache_dir = cache_dir
     
     #---------------------------------------------------------------
     # インスタンスを生成する関数
@@ -97,7 +100,7 @@ class AugmentedLLM:
                 #
                 image_paths = []
                 # 画像のパスの取得
-                query_image_paths = make_image_paths(images)
+                query_image_paths = make_image_paths(user_images=images, cache_dir=self.cache_dir)
                 image_paths.extend(query_image_paths)
                 # メッセージに追加
                 local_history[0]["images"] = image_paths 
@@ -131,7 +134,7 @@ class AugmentedLLM:
             #
             image_paths = []
             # 画像のパスの取得
-            query_image_paths = make_image_paths(images)
+            query_image_paths = make_image_paths(user_images=images, cache_dir=self.cache_dir)
             image_paths.extend(query_image_paths)
             # メッセージに追加
             user_message["images"] = image_paths 
