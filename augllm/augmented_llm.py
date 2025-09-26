@@ -12,7 +12,7 @@ class AugmentedLLM:
     #---------------------------------------------------------------
     # パラメータの初期化
     #---------------------------------------------------------------
-    def __init__(self, llm, prompt_builder, cache_dir, tools=None):
+    def __init__(self, llm, prompt_builder, cache_dir, tools=None, tool_selector_name="gemma3:4b"):
 
         # LLMの設定
         self.llm = llm
@@ -20,10 +20,15 @@ class AugmentedLLM:
         
         # ツールの定義
         self.tool_dict = register_tools(tools) if tools is not None else None
-        self.tool_selector_name = "gemma3:4b"
+        self.tool_selector_name = tool_selector_name
         
         # 内部データの保存先
         self.cache_dir = cache_dir
+        
+        # 結果保存変数
+        self.report_text = None
+        self.report_images = None
+        self.report_data = None
     
     #---------------------------------------------------------------
     # インスタンスを生成する関数
@@ -231,6 +236,12 @@ class AugmentedLLM:
             #
             full_reply = reply 
             yield full_reply
+        
+        # 報告用のデータ作成
+        self.report_text = f"{full_reply}"
+        self.report_images = None
+        self.report_images = local_history[0].get("images", None)
+        self.report_data = None
     
     #---------------------------------------------------------------
     # 
