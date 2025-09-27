@@ -32,6 +32,19 @@ https://github.com/ToPo‑ToPo‑ToPo/augllm
 - （任意）外部ツール呼び出しに必要なライブラリ（HTTP クライアント、RPC ライブラリ、サブプロセス制御など）
 
 ## 3. インストール方法
+1. 仮想環境の作成と起動
+
+以下を実行し、仮想環境を作成します。
+```
+python -m venv env
+```
+
+仮想環境を起動します。Macの場合は以下を実行します。
+```
+source env/bin/activate
+```
+
+2. ライブラリのインストール
 
 ```bash
 pip install .
