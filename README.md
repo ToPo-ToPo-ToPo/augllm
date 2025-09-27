@@ -73,4 +73,5 @@ pip install .
 ## 5. ライセンス
 
 このプロジェクトは **Apache‑2.0 ライセンス** のもとで公開されています。
+詳細は、[LICENSE](https://github.com/ToPo-ToPo-ToPo/augllm/blob/main/LICENSE)ファイルを確認してください。
 
