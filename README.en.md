@@ -4,7 +4,7 @@
 It provides an interface for utilizing external tools via **Function Calling**.  
 Note that the actual implementations of the tools are not included—users are expected to integrate their own external implementations as needed.  
 
-Repository:  
+Since it is registered on PyPI, you can install it with pip install.
 https://github.com/ToPo-ToPo-ToPo/augllm  
 
 ---
@@ -32,7 +32,7 @@ https://github.com/ToPo-ToPo-ToPo/augllm
 
 ## 2. Requirements
 
-- Python 3.8 or higher  
+- Python 3.11 or higher  
 - An environment where Ollama CLI or API client is available  
 
 ---
@@ -54,7 +54,7 @@ source env/bin/activate
 2. Install the library  
 
 ```bash
-pip install .
+pip install augllm
 ```
 
 ---

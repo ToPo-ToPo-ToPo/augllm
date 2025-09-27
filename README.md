@@ -2,12 +2,12 @@
 
 [English README is here](./README.en.md)
 
-**augllm** は、Ollama を用いた拡張型（Augmented）大規模言語モデル（LLM）操作のためのラッパーライブラリです。  
+**augllm** は、Ollama を用いた拡張型（Augmented）大規模言語モデル（LLM）操作のためのラッパーです。  
 Function Calling による外部ツール利用のためのインターフェースを提供します。  
 ただし、ツール本体の実装は含まず、利用者が必要に応じて外部実装を組み込む形を想定しています。
 
-リポジトリ：  
-https://github.com/ToPo‑ToPo‑ToPo/augllm
+PyPIに登録されているため、pip install でインストールできます。
+https://pypi.org/project/augllm/
 
 ## 目次
 
@@ -28,7 +28,7 @@ https://github.com/ToPo‑ToPo‑ToPo/augllm
 
 ## 2. 前提条件
 
-- Python 3.8 以上  
+- Python 3.11 以上  
 - Ollama コマンドラインや API クライアントが動作可能な環境  
 
 ## 3. インストール方法
@@ -46,8 +46,14 @@ source env/bin/activate
 
 2. ライブラリのインストール
 
+通常のライブラリとして使う場合は以下を実行します。
 ```bash
-pip install .
+pip install augllm
+```
+
+このライブラリ自体の改良を行いたい場合は以下を実行します。
+```bash
+pip install -e .
 ```
 
 ## 4. 使い方
