@@ -4,7 +4,7 @@
 It provides an interface for utilizing external tools via **Function Calling**.  
 Note that the actual implementations of the tools are not included—users are expected to integrate their own external implementations as needed.  
 
-Since it is registered on PyPI, you can install it with pip install.
+Repository:
 https://github.com/ToPo-ToPo-ToPo/augllm  
 
 ---
