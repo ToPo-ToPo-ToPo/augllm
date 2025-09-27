@@ -1,4 +1,7 @@
 
+# Author: Shun Ogawa (a.k.a. "ToPo")
+# Copyright (c) 2025 Shun Ogawa (a.k.a. "ToPo")
+# License: Apache License Version 2.0
 
 from typing import Optional
 from .make_image_paths import make_image_paths

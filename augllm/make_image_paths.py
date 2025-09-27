@@ -1,4 +1,8 @@
 
+# Author: Shun Ogawa (a.k.a. "ToPo")
+# Copyright (c) 2025 Shun Ogawa (a.k.a. "ToPo")
+# License: Apache License Version 2.0
+
 #  画像処理関連の関数
 from .image_controller import shrink_and_cache_image, is_image_file 
 #----------------------------------------------------------------------

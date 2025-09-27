@@ -1,4 +1,7 @@
 
+# Author: Shun Ogawa (a.k.a. "ToPo")
+# Copyright (c) 2025 Shun Ogawa (a.k.a. "ToPo")
+# License: Apache License Version 2.0
 
 import ollama
 import subprocess

@@ -1,4 +1,8 @@
 
+# Author: Shun Ogawa (a.k.a. "ToPo")
+# Copyright (c) 2025 Shun Ogawa (a.k.a. "ToPo")
+# License: Apache License Version 2.0
+
 from typing import List, Tuple, Optional
 from .function_calling import cast_arguments, extract_tool_calls_from_yaml
 from .llm_interface import LLMInterface

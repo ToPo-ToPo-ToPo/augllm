@@ -10,10 +10,10 @@ this_directory = Path(__file__).parent
 NAME = 'augllm'
 AUTHOR = 'Shun Ogawa (a.k.a. "ToPo")'
 DESCRIPTION = "A library for augmenting large language models",
-LONG_DESCRIPTION = (this_directory / "README.md").read_text(encoding="utf-8")
+LONG_DESCRIPTION = (this_directory / "README.en.md").read_text(encoding="utf-8")
 URL = 'https://github.com/ToPo-ToPo-ToPo/augllm'
 LICENSE = 'Apache License Version 2.0'
-VERSION = '1.0'
+VERSION = '1.01'
 PYTHON_REQUIRES = ">=3.11"
 CLASSIFIERS = [
     "Programming Language :: Python :: 3",
