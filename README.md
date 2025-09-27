@@ -1,4 +1,7 @@
 # augllm
+
+[English README is here](./README.en.md)
+
 **augllm** は、Ollama を用いた拡張型（Augmented）大規模言語モデル（LLM）操作のためのラッパーライブラリです。  
 Function Calling による外部ツール利用のためのインターフェースを提供します。  
 ただし、ツール本体の実装は含まず、利用者が必要に応じて外部実装を組み込む形を想定しています。
