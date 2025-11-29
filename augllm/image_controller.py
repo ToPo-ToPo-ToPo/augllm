@@ -24,7 +24,7 @@ def get_image_cache_path(image_path, cache_dir):
 #--------------------------------------------------------------------------------------
 # 画像をリサイズして キャッシュで画像を保存し、LLMにパスを返す関数
 #--------------------------------------------------------------------------------------
-def shrink_and_cache_image(image_path, cache_dir, max_size=512):
+def shrink_and_cache_image(image_path, cache_dir, max_size=2048):
     os.makedirs(cache_dir, exist_ok=True)
     cached_path = get_image_cache_path(image_path, cache_dir)
 
@@ -43,7 +43,7 @@ def shrink_and_cache_image(image_path, cache_dir, max_size=512):
 #--------------------------------------------------------------------------------------
 # 画像をリサイズして Base64 エンコードされた文字列で返す関数（Ollamaに安全に渡せる形式）
 #--------------------------------------------------------------------------------------
-def shrink_image(image_path, max_size=512):
+def shrink_image(image_path, max_size=2048):
     try:
         image = Image.open(image_path)
         if image.mode in ('RGBA', 'P'):
@@ -65,7 +65,7 @@ def shrink_image(image_path, max_size=512):
 #--------------------------------------------------------------------------------------
 # パスで画像を取得する場合
 #--------------------------------------------------------------------------------------
-def shrink_image_to_path(image_path, cache_dir, max_size=512):
+def shrink_image_to_path(image_path, cache_dir, max_size=2048):
     try:
         #
         image = Image.open(image_path)
