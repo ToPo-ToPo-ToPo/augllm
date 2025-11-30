@@ -5,7 +5,6 @@
 
 from typing import Optional
 from .image_controller_base64 import process_images_to_base64
-#from .image_controller import make_image_paths
 from .function_calling import register_tools, generate_system_prompt
 from .tool_handler import select_tool
 #===================================================================================
@@ -59,7 +58,7 @@ class AugmentedLLM:
     #---------------------------------------------------------------
     # ツール実行結果を整形して、LLMに渡すための最終的なメッセージを作成
     #---------------------------------------------------------------
-    def build_messages_with_tool_result(self, system_prompt, tool_execution_results, memory, local_history):
+    def build_messages_with_tool_result(self, system_prompt, tool_execution_results, few_shot_examples, memory, local_history):
         
         # 初期化
         tool_results_summary_for_llm: Optional[str] = None
@@ -114,7 +113,8 @@ class AugmentedLLM:
         
         # 最終応答のためのメッセージリストを作成
         # historyには、ユーザープロンプト、LLMのツール試行応答、ツール結果の要約(あれば) が含まれる
-        messages = [system_prompt] + memory + local_history
+        # メッセージの結合順序: System -> Few-Shot -> Memory -> Local History (Result含む)
+        messages = [system_prompt] + few_shot_examples + memory + local_history
         
         #
         return messages
@@ -122,8 +122,9 @@ class AugmentedLLM:
     #---------------------------------------------------------------
     # LLMに渡すための最終的なメッセージを作成
     #---------------------------------------------------------------
-    def build_messages(self, system_prompt, memory, local_history):
-        return [system_prompt] + memory + local_history
+    def build_messages(self, system_prompt, few_shot_examples, memory, local_history):
+        # メッセージの結合順序: System -> Few-Shot -> Memory -> Local History
+        return [system_prompt] + few_shot_examples + memory + local_history
     
     #---------------------------------------------------------------
     # LLMに渡すための最終的なメッセージを作成
@@ -148,8 +149,15 @@ class AugmentedLLM:
     #---------------------------------------------------------------
     # 回答を生成
     #---------------------------------------------------------------
-    def respond(self, user_text, user_images=None, memory=[], stream=False):
-        
+    def respond(self, user_text, user_images=None, few_shot_examples=None, memory=None, stream=False):
+    
+        # デフォルト引数の安全化処理
+        # Pythonの仕様上、引数定義で=[]と書かず、Noneにして内部で空リストにするのが安全
+        if few_shot_examples is None:
+            few_shot_examples = []
+        if memory is None:
+            memory = []
+
         # ユーザーの入力を整形
         query_message = self.build_user_message(
             text=user_text, 
@@ -192,6 +200,7 @@ class AugmentedLLM:
             messages = self.build_messages_with_tool_result(
                 system_prompt=system_prompt,
                 tool_execution_results=tool_execution_results,
+                few_shot_examples=few_shot_examples,
                 memory=memory,
                 local_history=local_history
             )
@@ -209,6 +218,7 @@ class AugmentedLLM:
             # 最終的なメッセージを作成
             messages = self.build_messages(
                 system_prompt=system_prompt,
+                few_shot_examples=few_shot_examples,
                 memory=memory,
                 local_history=local_history
             )
