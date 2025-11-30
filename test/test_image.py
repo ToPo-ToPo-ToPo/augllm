@@ -10,7 +10,7 @@ from augllm import AugmentedLLM, LLMInterface, PromptBuilder
 if __name__ == "__main__":
     
     # 使用するLLMを指定
-    model_path = "gemma3:4b"
+    model_path = "gemma3:27b"
     
     # モデルのインスタンスを生成
     llm = AugmentedLLM(

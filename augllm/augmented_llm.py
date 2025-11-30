@@ -4,7 +4,7 @@
 # License: Apache License Version 2.0
 
 from typing import Optional
-from .make_image_paths import make_image_paths
+from .image_controller import make_image_paths
 from .function_calling import register_tools, generate_system_prompt
 from .tool_handler import select_tool
 #===================================================================================
