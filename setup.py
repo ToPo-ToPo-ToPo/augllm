@@ -13,7 +13,7 @@ DESCRIPTION = "A library for augmenting large language models",
 LONG_DESCRIPTION = (this_directory / "README.en.md").read_text(encoding="utf-8")
 URL = 'https://github.com/ToPo-ToPo-ToPo/augllm'
 LICENSE = 'Apache License Version 2.0'
-VERSION = '1.2'
+VERSION = '1.3'
 PYTHON_REQUIRES = ">=3.11"
 CLASSIFIERS = [
     "Programming Language :: Python :: 3",
