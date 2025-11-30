@@ -26,12 +26,11 @@ if __name__ == "__main__":
             system_prompt_text="あなたは、AIアシスタントです。",
             system_prompt_images=""
         ),
-        cache_dir="cache/",
         tools=None,
     )
     
     # 入力文章
-    user_test = "次の画像の内容について説明してください。"
+    user_test = "次の画像の内容について説明してください。トポロジー最適化に使います。"
     
     # 入力画像
     # データが保存されている箇所
