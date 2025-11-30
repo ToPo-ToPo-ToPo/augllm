@@ -48,7 +48,6 @@ if __name__ == "__main__":
             system_prompt_text="あなたは、AIアシスタントです。",
             system_prompt_images=""
         ),
-        #cache_dir="cache/",
         tools=None,
     )
     
