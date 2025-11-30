@@ -3,6 +3,7 @@
 # Copyright (c) 2025 Shun Ogawa (a.k.a. "ToPo")
 # License: Apache License Version 2.0
 
+import copy
 from typing import Optional
 from .image_controller_base64 import process_images_to_base64
 from .function_calling import register_tools, generate_system_prompt
@@ -54,6 +55,33 @@ class AugmentedLLM:
     #---------------------------------------------------------------
     def free_model(self):
         self.llm.free_model()
+    
+    #---------------------------------------------------------------
+    # Few-Shotリスト内の画像を処理する内部ヘルパー関数 (新規追加)
+    #---------------------------------------------------------------
+    def _process_few_shot_images(self, few_shot_examples):
+        """
+        Few-Shotリスト内の画像パスをBase64に変換して新しいリストを返す
+        """
+        if not few_shot_examples:
+            return []
+
+        # 元のリストを変更しないようにコピー
+        processed_examples = copy.deepcopy(few_shot_examples)
+
+        for msg in processed_examples:
+            # "images" キーがあり、かつ空でない場合
+            if "images" in msg and msg["images"]:
+                
+                # 文字列の場合は明示的にリストに変換
+                if isinstance(msg["images"], str):
+                    msg["images"] = [msg["images"]]
+                
+                # 画像パスのリストをBase64文字列のリストに変換
+                result = process_images_to_base64(user_images=msg["images"])
+                msg["images"] = result
+        
+        return processed_examples
     
     #---------------------------------------------------------------
     # ツール実行結果を整形して、LLMに渡すための最終的なメッセージを作成
@@ -157,6 +185,10 @@ class AugmentedLLM:
             few_shot_examples = []
         if memory is None:
             memory = []
+        
+        # Few-Shot内の画像を処理
+        # これにより、ユーザーはパスを指定するだけでOKになります
+        processed_few_shots = self._process_few_shot_images(few_shot_examples)
 
         # ユーザーの入力を整形
         query_message = self.build_user_message(
@@ -200,7 +232,7 @@ class AugmentedLLM:
             messages = self.build_messages_with_tool_result(
                 system_prompt=system_prompt,
                 tool_execution_results=tool_execution_results,
-                few_shot_examples=few_shot_examples,
+                few_shot_examples=processed_few_shots,
                 memory=memory,
                 local_history=local_history
             )
@@ -218,7 +250,7 @@ class AugmentedLLM:
             # 最終的なメッセージを作成
             messages = self.build_messages(
                 system_prompt=system_prompt,
-                few_shot_examples=few_shot_examples,
+                few_shot_examples=processed_few_shots,
                 memory=memory,
                 local_history=local_history
             )
